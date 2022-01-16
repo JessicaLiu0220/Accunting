@@ -1,17 +1,15 @@
 <template>
   <div class="tags">
     <div class="current">
-      <div><span>衣衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div><span>衣</span></div>
-      <div class="add"><span>+</span></div>
+      <div
+        v-for="tag in dataSource"
+        :key="tag"
+        @click="toggle(tag)"
+        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+      >
+        <span>{{ tag }}</span>
+      </div>
+      <div class="add" @click="create"><span>+</span></div>
     </div>
     <!-- <div class="new">
         <button>添加标签</button>
@@ -24,7 +22,30 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 @Component
-export default class Tags extends Vue {}
+export default class Tags extends Vue {
+  @Prop() dataSource: string[] | undefined;
+  selectedTags: string[] = [];
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
+    }
+  }
+  create() {
+    const name = window.prompt("请输入标签名");
+    //点击取消也不会新增标签
+    if (!name) {
+      return;
+    }
+    if (name === "") {
+      window.alert("标签名不能为空");
+    } else if (this.dataSource) {
+      this.$emit("update:dataSource", [...this.dataSource, name]);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +65,8 @@ export default class Tags extends Vue {}
       display: flex;
       // border: 1px solid red;
       width: 25%;
-      height: 80px;
+      height: 50px;
+      margin-bottom: 20px;
       justify-content: center;
       > span {
         display: inline-block;
@@ -54,10 +76,9 @@ export default class Tags extends Vue {}
         border-radius: 10px;
         text-align: center;
         line-height: 50px;
-
-        // &.selected {
-        //   background: $color-highlight;
-        // }
+      }
+      &.selected > span {
+        background: $color-highlight;
       }
     }
     > .add {
