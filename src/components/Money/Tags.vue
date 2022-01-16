@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="current">
-      <div><span>衣</span></div>
+      <div><span>衣衣</span></div>
       <div><span>衣</span></div>
       <div><span>衣</span></div>
       <div><span>衣</span></div>
@@ -48,12 +48,12 @@ export default class Tags extends Vue {}
       justify-content: center;
       > span {
         display: inline-block;
-        height: 60px;
+        height: 50px;
         width: 70px;
         background: $color-shadow;
         border-radius: 10px;
         text-align: center;
-        line-height: 60px;
+        line-height: 50px;
 
         // &.selected {
         //   background: $color-highlight;
