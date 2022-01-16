@@ -31,7 +31,6 @@
     padding: 0px 16px;
     text-align: right;
     background: $color-shadow;
-    border-top: 2px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
   }
   .buttons {

@@ -1,18 +1,18 @@
 <template>
   <div class="tags">
-    <ul class="current">
-      <li :class="selected">衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li>衣</li>
-      <li class="add" @click="newTag">+</li>
-    </ul>
+    <div class="current">
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected"><span>衣</span></div>
+      <div :class="selected" class="add"><span>+</span></div>
+    </div>
     <!-- <div class="new">
         <button>添加标签</button>
       </div>
@@ -31,22 +31,33 @@ export default class Tags extends Vue {}
 @import "~@/assets/style/helper.scss";
 .tags {
   flex-grow: 2;
-  border: 1px solid red;
-  //   margin: auto;
+  // border: 1px solid red;
+  margin: auto;
+  margin-top: 20px;
+  width: 90%;
   > .current {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
-    border: 1px solid red;
-    > li {
-      background: $color-shadow;
-      height: 60px;
-      width: 60px;
-      border-radius: 30px;
-      text-align: center;
-      line-height: 60px;
-      &.selected {
-        background: $color-highlight;
+    // border: 1px solid green;
+
+    > div {
+      display: flex;
+      // border: 1px solid red;
+      width: 25%;
+      height: 80px;
+      justify-content: center;
+      > span {
+        display: inline-block;
+        height: 60px;
+        width: 80px;
+        background: $color-shadow;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 60px;
+
+        &.selected {
+          background: $color-highlight;
+        }
       }
     }
     > .add {

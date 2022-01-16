@@ -16,7 +16,8 @@ export default {
 <style lang="scss" scoped>
 .notes {
   font-size: 14px;
-  background: #f5f5f5;
+  background: white;
+  border-top: 1px solid #f3f3f3;
   padding-left: 16px;
   display: flex;
   align-items: center;
@@ -24,7 +25,7 @@ export default {
     padding-right: 16px;
   }
   input {
-    height: 64px;
+    height: 54px;
     flex-grow: 1;
     background: transparent;
     border: none;
