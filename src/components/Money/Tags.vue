@@ -1,17 +1,17 @@
 <template>
   <div class="tags">
     <div class="current">
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected"><span>衣</span></div>
-      <div :class="selected" class="add"><span>+</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div><span>衣</span></div>
+      <div class="add"><span>+</span></div>
     </div>
     <!-- <div class="new">
         <button>添加标签</button>
@@ -49,15 +49,15 @@ export default class Tags extends Vue {}
       > span {
         display: inline-block;
         height: 60px;
-        width: 80px;
+        width: 70px;
         background: $color-shadow;
         border-radius: 10px;
         text-align: center;
         line-height: 60px;
 
-        &.selected {
-          background: $color-highlight;
-        }
+        // &.selected {
+        //   background: $color-highlight;
+        // }
       }
     }
     > .add {

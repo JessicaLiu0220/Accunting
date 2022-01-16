@@ -10,20 +10,21 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
-@Component
+@Component //告诉ts下面的内容是vue的组件
 export default class Types extends Vue {
   type = "-";
-  //   selectType(type: string) {
-  //     if (type !== "-" && type !== "+") {
-  //       throw new Error("type is unknown");
-  //     }
-  //     this.type = type;
-  //   }
-  //   @Watch("type")
-  //   onTypeChanged(value: string) {
-  //     this.$emit("update:value", value);
-  //   }
+  selectType(type: string) {
+    if (type !== "-" && type !== "+") {
+      throw new Error("type is unknown");
+    }
+    this.type = type;
+  }
 }
+//   //   @Watch("type")
+//   //   onTypeChanged(value: string) {
+//   //     this.$emit("update:value", value);
+//   //   }
+// }
 </script>
 
 <style lang="scss" scoped>
