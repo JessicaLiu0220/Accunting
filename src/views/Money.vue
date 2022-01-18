@@ -4,7 +4,7 @@
     {{ record }}
     <Tags :dataSource.sync="tags" @update:value="onUpdateTags" />
     <Notes @update:value="onUpdateNotes" />
-    <Number-pad @update:value="onUpdateAmount" />
+    <Number-pad @update:value="onUpdateAmount" @submit="saveRecord" />
   </Layout>
 </template>
 
@@ -14,7 +14,7 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Notes from "@/components/Money/Notes.vue";
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 //声明数据类型
 type Record = {
   type: string;
@@ -29,7 +29,8 @@ type Record = {
 export default class Money extends Vue {
   //将收集的所有数据放到record中
   record: Record = { type: "-", tags: [], notes: "", amount: 0 };
-
+  //存储每次提交的record
+  recordList: Record[] = [];
   tags = ["衣", "食", "住", "行"];
   //获取tags中选中的标签，将获取的最新值传到record中
   onUpdateTags(value: string[]) {
@@ -42,6 +43,17 @@ export default class Money extends Vue {
   //获取numberpad中输入的内容
   onUpdateAmount(value: string) {
     this.record.amount = parseInt(value);
+  }
+  saveRecord() {
+    // 保存的时候把提交的record推到recordList中
+    const record2 = JSON.parse(JSON.stringify(this.record));
+    this.recordList.push(record2);
+    console.log(this.recordList);
+  }
+  @Watch("recordList")
+  onRecordListChanged() {
+    //把recordList保存到localStorage中
+    window.localStorage.setItem("recordList", JSON.stringify(this.record));
   }
 }
 </script>
