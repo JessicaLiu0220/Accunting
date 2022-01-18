@@ -18,8 +18,8 @@ module.exports = {
   },
   "globals": {  //与上方的rules是同级的
     "__WebpackModuleApi": true,
-    "RecordItem": true
-    // "TagListModel": true
+    "RecordItem": true,
+    "TagListModel": true
   },
   overrides: [
     {
