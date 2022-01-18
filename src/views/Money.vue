@@ -1,27 +1,47 @@
 <template>
   <Layout class-prefix="layout">
-    <Types />
-    <Tags :dataSource.sync="tags" />
-    <Notes />
-    <Number-pad />
+    <Types :value.sync="record.type" />
+    {{ record }}
+    <Tags :dataSource.sync="tags" @update:value="onUpdateTags" />
+    <Notes @update:value="onUpdateNotes" />
+    <Number-pad @update:value="onUpdateAmount" />
   </Layout>
 </template>
 
-<script lang="js">
+<script lang="ts">
 import Vue from "vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
-import { Component } from "vue-property-decorator";
 import Types from "@/components/Money/Types.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Notes from "@/components/Money/Notes.vue";
+import { Component } from "vue-property-decorator";
+//声明数据类型
+type Record = {
+  type: string;
+  tags: string[];
+  notes: string;
+  amount: number;
+};
+
 @Component({
   components: { NumberPad, Types, Tags, Notes },
 })
 export default class Money extends Vue {
-  data(){
-    return{
-  tags:['衣','食','住','行',]
-    }
+  //将收集的所有数据放到record中
+  record: Record = { type: "-", tags: [], notes: "", amount: 0 };
+
+  tags = ["衣", "食", "住", "行"];
+  //获取tags中选中的标签，将获取的最新值传到record中
+  onUpdateTags(value: string[]) {
+    this.record.tags = value;
+  }
+  //获取notes中输入的内容
+  onUpdateNotes(value: string) {
+    this.record.notes = value;
+  }
+  //获取numberpad中输入的内容
+  onUpdateAmount(value: string) {
+    this.record.amount = parseInt(value);
   }
 }
 </script>
