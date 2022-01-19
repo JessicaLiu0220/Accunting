@@ -20,6 +20,7 @@ module.exports = {
     "__WebpackModuleApi": true,
     "RecordItem": true,
     "TagListModel": true,
+    "Tag": true
   },
   overrides: [
     {
