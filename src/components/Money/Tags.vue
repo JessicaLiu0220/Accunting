@@ -7,7 +7,7 @@
         @click="toggle(tag)"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
       >
-        <span>{{ tag }}</span>
+        <span>{{ tag.name }}</span>
       </div>
       <div class="add" @click="create"><span>+</span></div>
     </div>

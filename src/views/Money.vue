@@ -3,7 +3,11 @@
     <Types :value.sync="record.type" />
     {{ recordList }}
     <Tags :dataSource.sync="tags" @update:value="onUpdateTags" />
-    <Notes @update:value="onUpdateNotes" />
+    <Notes
+      @update:value="onUpdateNotes"
+      fieldName="备注："
+      placeholder="请输入需要备注的内容"
+    />
     <Number-pad @update:value="onUpdateAmount" @submit="saveRecord" />
   </Layout>
 </template>
@@ -16,8 +20,10 @@ import Tags from "@/components/Money/Tags.vue";
 import Notes from "@/components/Money/Notes.vue";
 import model from "@/model";
 import { Component, Watch } from "vue-property-decorator";
+import tagListModel from "@/models/tagListModel";
 //获取数据
 const recordList = model.fetch();
+const tagList = tagListModel.fetch();
 //声明数据类型
 
 @Component({
@@ -29,7 +35,7 @@ export default class Money extends Vue {
   //存储每次提交的record
   recordList: RecordItem[] = recordList;
 
-  tags = ["衣", "食", "住", "行", "彩票"];
+  tags = tagList;
   //获取tags中选中的标签，将获取的最新值传到record中
   onUpdateTags(value: string[]) {
     this.record.tags = value;
