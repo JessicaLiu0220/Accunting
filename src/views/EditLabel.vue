@@ -12,7 +12,8 @@
       placeholder="请输入标签名"
     />
     <div class="createTag-wrapper">
-      <button class="createTag" @click="remove">删除类别</button>
+      <button class="createTag" @click="remove">删除</button>
+      <button class="saveTag" @click="save">保存</button>
     </div>
   </Layout>
 </template>
@@ -46,9 +47,13 @@ export default class EditLabel extends Vue {
   }
   remove() {
     if (this.tag) {
-      tagListModel.remove(this.tag.id);
-      this.$router.back();
+      if (tagListModel.remove(this.tag.id)) {
+        this.$router.back();
+      }
     }
+  }
+  save() {
+    this.$router.back();
   }
   goBack() {
     console.log("back");
@@ -81,8 +86,19 @@ export default class EditLabel extends Vue {
 }
 .createTag-wrapper {
   text-align: center;
-  padding: 24px;
+  padding-top: 20px;
+
+  margin: 0 auto;
   > .createTag {
+    margin-right: 60px;
+    font-size: 16px;
+    background: $color-shadow;
+    border: none;
+    border: 0.5px solid #404040;
+    border-radius: 5px;
+    padding: 5px 16px;
+  }
+  > .saveTag {
     font-size: 16px;
     background: $color-shadow;
     border: none;
