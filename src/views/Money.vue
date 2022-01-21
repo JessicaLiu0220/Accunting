@@ -24,7 +24,7 @@ import tagListModel from "@/models/tagListModel";
 import recordListModel from "@/models/recordListModel";
 //获取数据
 const recordList = model.fetch();
-const tagList = tagListModel.fetch();
+
 //声明数据类型
 
 @Component({
@@ -36,7 +36,7 @@ export default class Money extends Vue {
   //存储每次提交的record
   recordList: RecordItem[] = recordList;
 
-  tags = tagList;
+  tags = window.tagList;
   //获取tags中选中的标签，将获取的最新值传到record中
   onUpdateTags(value: string[]) {
     this.record.tags = value;

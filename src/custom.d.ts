@@ -5,18 +5,19 @@ type RecordItem = {
     amount: number;
     createdAt?: Date;
 };
-// type Tag = {
-//     id: string;
-//     name: string;
-// }
-// type TagListModel = {
-//     data: Tag[]
-//     fetchRecords: () => Tag[]
-//     create: (number: string) => 'success' | 'duplicated'//success表示成功，duplicated表示失败
-//     update: (id: string, number: string) => 'success' | 'duplicated' | 'not found'
-//     remove: (id: string) => boolean
-//     saveRecords: () => void
-
-// }
-
+type Tag = {
+    id: string;
+    name: string;
+}
+type TagListModel = {
+    data: Tag[]
+    fetch: () => Tag[]
+    create: (name: string) => 'success' | 'duplicated' // 联合类型
+    update: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
+    remove: (id: string) => boolean
+    save: () => void
+}
+interface Window {
+    tagList: Tag[];
+}
 
