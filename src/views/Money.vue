@@ -19,6 +19,7 @@ import Types from "@/components/Money/Types.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Notes from "@/components/Money/Notes.vue";
 import model from "@/model";
+import store from "@/store/index2";
 import { Component } from "vue-property-decorator";
 //获取数据
 
@@ -31,9 +32,8 @@ export default class Money extends Vue {
   //将收集的所有数据放到record中
   record: RecordItem = { type: "-", tags: [], notes: "", amount: 0 };
   //存储每次提交的record
-  recordList = window.recordList;
-
-  tags = window.tagList;
+  tags = store.tagList;
+  recordList = store.recordList;
   //获取tags中选中的标签，将获取的最新值传到record中
   onUpdateTags(value: string[]) {
     this.record.tags = value;
@@ -47,7 +47,7 @@ export default class Money extends Vue {
     this.record.amount = parseInt(value);
   }
   saveRecord() {
-    window.createRecord(this.record);
+    store.createRecord(this.record);
   }
 }
 </script>

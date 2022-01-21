@@ -22,6 +22,7 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import Notes from "@/components/Money/Notes.vue";
+import store from "@/store/index2";
 
 @Component({
   components: { Notes },
@@ -29,22 +30,19 @@ import Notes from "@/components/Money/Notes.vue";
 export default class EditLabel extends Vue {
   tag?: Tag = undefined;
   created() {
-    const id = this.$route.params.id;
-    const tag = window.findTag(id);
-    if (tag) {
-      this.tag = tag;
-    } else {
+    this.tag = store.findTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   update(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
   remove() {
     if (this.tag) {
-      if (window.removeTag(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         this.$router.back();
       } else {
         window.alert("删除失败");
