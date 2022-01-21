@@ -2,7 +2,7 @@
   <Layout class-prefix="layout">
     <Types :value.sync="record.type" />
     {{ record }}
-    <Tags :dataSource.sync="tags" @update:value="onUpdateTags" />
+    <Tags />
     <Notes
       @update:value="onUpdateNotes"
       fieldName="备注："
@@ -32,12 +32,8 @@ export default class Money extends Vue {
   //将收集的所有数据放到record中
   record: RecordItem = { type: "-", tags: [], notes: "", amount: 0 };
   //存储每次提交的record
-  tags = store.tagList;
   recordList = store.recordList;
-  //获取tags中选中的标签，将获取的最新值传到record中
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
-  }
+
   //获取notes中输入的内容
   onUpdateNotes(value: string) {
     this.record.notes = value;
