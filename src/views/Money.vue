@@ -21,6 +21,7 @@ import Notes from "@/components/Money/Notes.vue";
 import model from "@/model";
 import { Component, Watch } from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel";
+import recordListModel from "@/models/recordListModel";
 //获取数据
 const recordList = model.fetch();
 const tagList = tagListModel.fetch();
@@ -49,13 +50,11 @@ export default class Money extends Vue {
     this.record.amount = parseInt(value);
   }
   saveRecord() {
-    const record2: RecordItem = model.clone(this.record);
-    record2.createdAt = new Date();
-    this.recordList.push(record2);
+    recordListModel.create(this.record);
   }
   @Watch("recordList")
   onRecordListChange() {
-    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    recordListModel.save();
   }
 }
 </script>
