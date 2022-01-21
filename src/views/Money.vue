@@ -20,7 +20,6 @@ import Tags from "@/components/Money/Tags.vue";
 import Notes from "@/components/Money/Notes.vue";
 import model from "@/model";
 import { Component, Watch } from "vue-property-decorator";
-import tagListModel from "@/models/tagListModel";
 import recordListModel from "@/models/recordListModel";
 //获取数据
 const recordList = model.fetch();
