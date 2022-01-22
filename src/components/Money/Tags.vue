@@ -9,23 +9,28 @@
       >
         <span>{{ tag.name }}</span>
       </div>
-      <div class="add" @click="create"><span>+</span></div>
+      <div class="add" @click="createTag"><span>+</span></div>
     </div>
-    <!-- <div class="new">
-        <button>添加标签</button>
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { mixins } from "vue-class-component";
+import TagHelper from "@/mixins/TagHelper";
 import { Component, Prop } from "vue-property-decorator";
-import store from "@/store/index2";
 @Component
-export default class Tags extends Vue {
-  tagList = store.fetchTags();
+export default class Tags extends mixins(TagHelper) {
   selectedTags: string[] = [];
+
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+
+  created() {
+    this.$store.commit("fetchTags");
+  }
+
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -34,14 +39,6 @@ export default class Tags extends Vue {
       this.selectedTags.push(tag);
     }
     this.$emit("update:value", this.selectedTags);
-  }
-  create() {
-    const name = window.prompt("请输入标签名");
-    //点击取消也不会新增标签
-    if (!name) {
-      return;
-    }
-    store.createTag(name);
   }
 }
 </script>
