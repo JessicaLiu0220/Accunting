@@ -37,23 +37,22 @@ export default class Statistics extends Vue {
 
 <style scoped lang="scss">
 @import "~@/assets/style/helper.scss";
-// ::v-deep .type-tabs-item {
-//   background: white;
-//   &.selected {
-//     background: $color-highlight;
-//     &::after {
-//       display: none;
-//     }
-//   }
-// }
-::v-deep .interval-tabs-item {
+::v-deep .type-tabs-item {
   background: white;
-  border: 1px solid $color-shadow;
   &.selected {
-    background: $color-shadow;
+    background: $color-highlight;
     &::after {
       display: none;
     }
   }
+}
+::v-deep li.interval-tabs-item {
+  background: $color-shadow;
+  border: 1px solid white;
+  height: 48px;
+  font-size: 16px;
+  // &.selected {
+  //   background: $color-shadow;
+  // }
 }
 </style>
