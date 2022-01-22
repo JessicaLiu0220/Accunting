@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix="layout">
-    <Types :value.sync="record.type" />
+    <Tabs :data-source="recordTypeList" :value.sync="record.type" />
     {{ record }}
     <Tags />
     <Notes
@@ -15,16 +15,17 @@
 <script lang="ts">
 import Vue from "vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
-import Types from "@/components/Money/Types.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Notes from "@/components/Money/Notes.vue";
 import { Component } from "vue-property-decorator";
+import Tabs from "@/components/Tabs.vue";
+import recordTypeList from "@/constants/recordTypeList";
 //获取数据
 
 //声明数据类型
 
 @Component({
-  components: { NumberPad, Types, Tags, Notes },
+  components: { NumberPad, Tags, Notes, Tabs },
 })
 export default class Money extends Vue {
   //将收集的所有数据放到record中
@@ -32,6 +33,7 @@ export default class Money extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
+  recordTypeList = recordTypeList;
   created() {
     this.$store.commit("fetchRecords");
   }
