@@ -1,12 +1,10 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createId from '@/lib/createId';
-import Vue from 'vue'
-import Vuex from 'vuex'
 import router from '@/router';
 
-
 Vue.use(Vuex);
-
 
 const store = new Vuex.Store({
   state: {
@@ -18,7 +16,6 @@ const store = new Vuex.Store({
     setCurrentTag(state, id: string) {
       state.currentTag = state.tagList.filter(t => t.id === id)[0];
     },
-
     updateTag(state, payload: { id: string, name: string }) {
       const { id, name } = payload;
       const idList = state.tagList.map(item => item.id);
@@ -50,7 +47,6 @@ const store = new Vuex.Store({
       }
 
     },
-
     fetchRecords(state) {
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
     },
@@ -58,13 +54,12 @@ const store = new Vuex.Store({
       const record2: RecordItem = clone(record);
       record2.createdAt = new Date().toISOString();
       state.recordList.push(record2);
-      store.commit('saveRecords')
+      store.commit('saveRecords');
     },
     saveRecords(state) {
       window.localStorage.setItem('recordList',
         JSON.stringify(state.recordList));
     },
-    //抄一下
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
     },
@@ -78,11 +73,10 @@ const store = new Vuex.Store({
       state.tagList.push({ id, name: name });
       store.commit('saveTags');
       // window.alert('添加成功');
-
     },
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
-    }
+    },
   }
 });
 
