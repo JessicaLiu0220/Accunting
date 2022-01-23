@@ -2,9 +2,10 @@
   <Layout class-prefix="layout">
     <Tabs :data-source="recordTypeList" :value.sync="record.type" />
     {{ record }}
-    <Tags />
+    <Tags @update:value="record.tags = $event" />
     <Notes
       @update:value="onUpdateNotes"
+      :value.sync="record.notes"
       fieldName="备注："
       placeholder="请输入需要备注的内容"
     />
@@ -45,7 +46,14 @@ export default class Money extends Vue {
     this.record.notes = value;
   }
   saveRecord() {
+    if (!this.record.tags || this.record.tags.length === 0) {
+      return window.alert("请至少选择一个标签");
+    }
     this.$store.commit("createRecord", this.record);
+    if (this.$store.state.createRecordError === null) {
+      // window.alert("已保存");
+      this.record.notes = "";
+    }
   }
 }
 </script>

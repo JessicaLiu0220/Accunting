@@ -13,9 +13,9 @@
         </router-link>
       </div>
       <div class="createTag-wrapper">
-        <Button class="createTag" @click="createTag">
+        <button class="createTag" @click="createTag">
           <Icon name="add" />添加类别
-        </Button>
+        </button>
       </div>
     </div>
   </Layout>
@@ -43,11 +43,12 @@ export default class Labels extends mixins(TagHelper) {
   color: $color-deep;
 }
 .labels {
+  flex-grow: 2;
+  // border: 1px solid rgb(17, 10, 10);
   position: relative;
-  height: 100%;
   > .tags {
     font-size: 16px;
-    height: 86%;
+    max-height: 600px;
     overflow: auto;
     > .tag {
       display: flex;
@@ -71,13 +72,12 @@ export default class Labels extends mixins(TagHelper) {
     }
   }
   > .createTag-wrapper {
-    left: 50%;
-    bottom: 20px;
-    margin-left: -80px;
-    position: absolute;
+    // position: absolute;
+    // border: 1px solid blue;
     text-align: center;
     padding: 24px;
     > .createTag {
+      // border: 1px solid red;
       font-size: 16px;
       background: $color-shadow;
       border: none;
