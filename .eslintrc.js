@@ -21,6 +21,7 @@ module.exports = {
     "RecordItem": true,
     "Tag": true,
     "TagListModel": true,
+    "RootState": true
   },
   overrides: [
     {

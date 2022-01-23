@@ -29,11 +29,12 @@ import recordTypeList from "@/constants/recordTypeList";
 })
 export default class Money extends Vue {
   //将收集的所有数据放到record中
-  record: RecordItem = { type: "-", tags: [], notes: "", amount: 0 };
   get recordList() {
     return this.$store.state.recordList;
   }
   recordTypeList = recordTypeList;
+  record: RecordItem = { type: "-", tags: [], notes: "", amount: 0 };
+
   created() {
     this.$store.commit("fetchRecords");
   }
@@ -51,8 +52,8 @@ export default class Money extends Vue {
 }
 </script>
 
-<style lang="scss">
-.layout-content {
+<style lang="scss" scoped>
+::v-deep .layout-content {
   display: flex;
   flex-direction: column;
 }
