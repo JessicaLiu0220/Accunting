@@ -8,7 +8,7 @@
       fieldName="备注："
       placeholder="请输入需要备注的内容"
     />
-    <Number-pad @update:value="onUpdateAmount" @submit="saveRecord" />
+    <NumberPad :value.sync="record.amount" @submit="saveRecord" />
   </Layout>
 </template>
 
@@ -28,23 +28,21 @@ import recordTypeList from "@/constants/recordTypeList";
   components: { NumberPad, Tags, Notes, Tabs },
 })
 export default class Money extends Vue {
-  //将收集的所有数据放到record中
   get recordList() {
     return this.$store.state.recordList;
   }
   recordTypeList = recordTypeList;
-  record: RecordItem = { type: "-", tags: [], notes: "", amount: 0 };
-
+  record: RecordItem = {
+    tags: [],
+    notes: "",
+    type: "-",
+    amount: 0,
+  };
   created() {
     this.$store.commit("fetchRecords");
   }
-  //获取notes中输入的内容
   onUpdateNotes(value: string) {
     this.record.notes = value;
-  }
-  //获取numberpad中输入的内容
-  onUpdateAmount(value: string) {
-    this.record.amount = parseInt(value);
   }
   saveRecord() {
     this.$store.commit("createRecord", this.record);
